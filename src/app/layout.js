@@ -9,14 +9,14 @@ const serif = Cormorant_Garamond({
 const sans = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
-  title: "C4 Creation — Custom Embroidery & Apparel",
+  title: "Assar Patches — Custom PVC, Embroidered & Sublimation Patches",
   description:
-    "Custom embroidery, patches, logo customization and premium apparel — export quality, made to your brand.",
+    "Custom PVC, embroidered, sublimation, woven and leather patches — export quality, made to your brand.",
 };
 
 export default function RootLayout({ children }) {
   return (
-   <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

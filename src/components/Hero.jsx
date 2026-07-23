@@ -25,14 +25,14 @@ export default function Hero() {
 
       {/* faint watermark */}
       <span className="pointer-events-none absolute right-10 top-16 font-serif text-[160px] font-bold leading-none text-gold/5 sm:text-[220px]">
-        C4
+        AP
       </span>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24">
         <div className="max-w-2xl">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-gold">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            Custom Embroidery & Apparel
+            Custom Patches & Embroidery
           </p>
 
           <h1 className="font-serif text-5xl font-semibold leading-[1.02] text-cream sm:text-6xl lg:text-7xl">
@@ -42,12 +42,13 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-md text-base leading-relaxed text-cream/70 sm:text-lg">
-            We turn ideas into wearable identity — precision patches, logo embroidery,
-            and premium apparel, all made to your brand with an export-quality finish.
+            We turn ideas into wearable identity — precision PVC, embroidered,
+            sublimation, woven and leather patches, crafted to your brand with
+            an export-quality finish.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <a href="#embroidery" className="rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-ink shadow-lg shadow-gold/20 transition hover:bg-gold-dark">
+            <a href="#pvc-patches" className="rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-ink shadow-lg shadow-gold/20 transition hover:bg-gold-dark">
               Explore Our Work
             </a>
             <a href="#contact" className="rounded-full border border-cream/30 px-8 py-3.5 text-sm font-semibold text-cream transition hover:border-gold hover:text-gold">
@@ -69,7 +70,7 @@ export default function Hero() {
       </div>
 
       {/* scroll cue */}
-      <a href="#embroidery" className="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-cream/60 transition hover:text-gold" aria-label="Scroll down">
+      <a href="#pvc-patches" className="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-cream/60 transition hover:text-gold" aria-label="Scroll down">
         <span className="flex h-9 w-5 justify-center rounded-full border border-cream/40 pt-1.5">
           <span className="h-2 w-0.5 animate-bounce rounded-full bg-gold" />
         </span>

@@ -5,10 +5,11 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <h3 className="text-xl font-black">
-              C4 <span className="text-gold">CREATION</span>
+              ASSAR <span className="text-gold">PATCHES</span>
             </h3>
             <p className="mt-3 text-sm text-cream/60">
-              Custom embroidery aur premium apparels — aapke brand ke liye, export quality.
+              PVC, embroidered, sublimation, woven aur leather patches — aapke
+              brand ke liye, export quality mein.
             </p>
           </div>
 
@@ -17,8 +18,12 @@ export default function Footer() {
               Explore
             </h4>
             <ul className="space-y-2 text-sm text-cream/70">
-              <li><a href="#embroidery" className="hover:text-gold">Embroidery</a></li>
-              <li><a href="#apparels" className="hover:text-gold">Apparels</a></li>
+              <li><a href="#pvc-patches" className="hover:text-gold">PVC Patches</a></li>
+              <li><a href="#embroidered-patches" className="hover:text-gold">Embroidered Patches</a></li>
+              <li><a href="#sublimation-patches" className="hover:text-gold">Sublimation Patches</a></li>
+              <li><a href="#woven-patches" className="hover:text-gold">Woven Patches</a></li>
+              <li><a href="#leather-patches" className="hover:text-gold">Leather Patches</a></li>
+              <li><a href="/blogs" className="hover:text-gold">Blogs</a></li>
             </ul>
           </div>
 
@@ -27,15 +32,15 @@ export default function Footer() {
               Contact
             </h4>
             <ul className="space-y-2 text-sm text-cream/70">
-              <li>Email: c4creations0@gmail.com</li>
-              <li>Phone: +92 335 7909412</li>
-              <li>Sialkot, Pakistan</li>
+              <li>Email: assarpatches@gmail.com</li>
+              <li>Phone: TODO_PHONE</li>
+              <li>TODO_ADDRESS</li>
             </ul>
           </div>
         </div>
 
         <p className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-cream/50">
-          © 2026 C4 Creation. All rights reserved.
+          © 2026 Assar Patches. All rights reserved.
         </p>
       </div>
     </footer>

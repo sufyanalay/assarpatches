@@ -2,8 +2,6 @@
 import { useState } from "react";
 import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
 
-const ACCESS_KEY = "c3995f85-5587-41e7-b7f5-50512a7287a5";
-
 export default function Contact() {
   const [status, setStatus] = useState(""); // "", "sending", "success", "error"
 
@@ -11,17 +9,21 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     const formData = new FormData(e.target);
-    formData.append("access_key", ACCESS_KEY);
-    formData.append("subject", "New Quote Request — C4 Creation");
-    formData.append("from_name", "C4 Creation Website");
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    };
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/quote", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
-      if (data.success) {
+      if (data.ok) {
         setStatus("success");
         e.target.reset();
       } else setStatus("error");
@@ -83,15 +85,15 @@ export default function Contact() {
           {/* INFO + MAP */}
           <div className="space-y-6">
             <div className="grid gap-4 sm:grid-cols-2">
-              <InfoCard icon={FiMapPin} title="Address" text="Sialkot, Punjab, Pakistan" />
-              <InfoCard icon={FiPhone} title="Phone" text="+92 335 7909412" />
-              <InfoCard icon={FiMail} title="Email" text="c4creations0@gmail.com" />
+              <InfoCard icon={FiMapPin} title="Address" text="TODO_ADDRESS" />
+              <InfoCard icon={FiPhone} title="Phone" text="TODO_PHONE" />
+              <InfoCard icon={FiMail} title="Email" text="assarpatches@gmail.com" />
               <InfoCard icon={FiClock} title="Hours" text="Mon–Sat, 9am–6pm" />
             </div>
 
             <div className="overflow-hidden rounded-2xl border border-white/10">
               <iframe
-                title="C4 Creation Location"
+                title="Assar Patches Location"
                 src="https://www.google.com/maps?q=Sialkot,Pakistan&z=12&output=embed"
                 width="100%"
                 height="280"
