@@ -9,12 +9,15 @@ const items = [
 
 export default function Features() {
   return (
-    <section className="bg-ink py-16">
+    <section className="border-t border-white/5 bg-ink py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-5">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="text-center">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-gold">
+            <div
+              key={title}
+              className="flex flex-col items-center rounded-2xl border border-white/5 bg-white/[0.03] px-6 py-8 text-center transition hover:border-gold/30 hover:bg-white/[0.05]"
+            >
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold">
                 <Icon size={26} />
               </div>
               <h3 className="mt-4 font-bold text-cream">{title}</h3>

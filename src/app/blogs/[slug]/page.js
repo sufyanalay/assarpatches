@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db";
 import Blog from "@/models/Blog";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://assarpatches.com";
 
@@ -62,11 +64,13 @@ export default async function BlogDetailPage({ params }) {
   };
 
   return (
-    <main className="min-h-screen bg-neutral-950 text-white px-6 md:px-16 py-20">
+    <>
+      <Navbar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <main className="min-h-screen bg-neutral-950 text-white px-6 md:px-16 py-20">
       <article className="max-w-3xl mx-auto">
         <p className="text-amber-400 text-xs tracking-widest uppercase mb-3">Journal</p>
         <h1 className="text-3xl md:text-4xl font-semibold mb-4">{blog.title}</h1>
@@ -94,6 +98,8 @@ export default async function BlogDetailPage({ params }) {
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
       </article>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

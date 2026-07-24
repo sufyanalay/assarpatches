@@ -19,11 +19,11 @@ export default function SectionSlider({ section, flip }) {
     slug === "all" ? slides.length : slides.filter((s) => s.subSection === slug).length;
 
   return (
-    <section id={section.slug} className="scroll-mt-20 border-t border-ink/5 bg-cream py-20">
-      <div className="mx-auto max-w-7xl px-5">
+    <section id={section.slug} className="scroll-mt-20 border-t border-ink/5 bg-cream py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-5">
         <div className="mx-auto max-w-xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-dark">Our Craft</p>
-          <h2 className="mt-2 font-serif text-4xl font-bold text-ink sm:text-5xl">{section.title}</h2>
+          <h2 className="mt-2 font-serif text-3xl font-bold text-ink sm:text-4xl">{section.title}</h2>
           {section.description && <p className="mt-3 text-neutral-500">{section.description}</p>}
         </div>
 
@@ -32,7 +32,7 @@ export default function SectionSlider({ section, flip }) {
             <p className="mt-8 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-400">
               Filter by type
             </p>
-            <div className="no-bar mt-3 flex flex-wrap justify-center gap-2.5 overflow-x-auto pb-1">
+            <div className="no-bar mt-3 flex flex-nowrap justify-start gap-2.5 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:justify-center">
               <TabBtn active={tab === "all"} onClick={() => changeTab("all")} count={countFor("all")}>All</TabBtn>
               {section.subSections.map((ss) => (
                 <TabBtn key={ss.slug} active={tab === ss.slug} onClick={() => changeTab(ss.slug)} count={countFor(ss.slug)}>
@@ -43,21 +43,23 @@ export default function SectionSlider({ section, flip }) {
           </>
         )}
 
-        <div className={`mt-10 grid gap-7 lg:grid-cols-[1.4fr_1fr] lg:gap-8 ${flip ? "lg:[direction:rtl]" : ""}`}>
+        {/* Media/details pair — order-based flip instead of a direction:rtl hack,
+            so text alignment and scroll behaviour stay normal on every breakpoint */}
+        <div className="mt-10 overflow-hidden rounded-[22px] border border-ink/10 bg-white shadow-sm lg:grid lg:grid-cols-2">
           {/* MEDIA side */}
-          <div className={flip ? "lg:[direction:ltr]" : ""}>
-            <button onClick={next} className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[20px] bg-ink shadow-xl" aria-label="Next">
+          <div className={`relative ${flip ? "lg:order-2" : "lg:order-1"}`}>
+            <button onClick={next} className="group relative block aspect-[5/4] w-full overflow-hidden bg-ink" aria-label="Next">
               {slide.type === "video" ? (
                 <video key={slide.url} src={slide.url} className="animate-fade h-full w-full object-cover" autoPlay muted loop playsInline />
               ) : (
                 <img key={slide.url} src={slide.url} alt={slide.title} className="animate-fade h-full w-full object-cover transition duration-700 group-hover:scale-105" />
               )}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
               <span className="absolute right-4 top-4 rounded-full bg-gold px-3 py-1 text-xs font-bold text-ink">
                 {active + 1}/{filtered.length}
               </span>
-              <div className="absolute bottom-5 left-6 text-left">
-                <p className="font-serif text-2xl font-semibold text-cream drop-shadow">{slide.title}</p>
+              <div className="absolute bottom-5 left-5 right-16 text-left sm:left-6">
+                <p className="truncate font-serif text-lg font-semibold text-cream drop-shadow sm:text-xl lg:text-2xl">{slide.title || "Untitled"}</p>
                 {slide.subSection && (
                   <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-gold">{subName(slide.subSection)}</p>
                 )}
@@ -70,14 +72,14 @@ export default function SectionSlider({ section, flip }) {
             </button>
 
             {filtered.length > 1 && (
-              <div key={tab} className="no-bar mt-3 flex gap-2.5 overflow-x-auto pb-1">
+              <div key={tab} className="no-bar flex gap-2 overflow-x-auto bg-ink/[0.03] px-4 py-3">
                 {filtered.map((s, i) => (
                   <button
                     key={s._id || s.url}
                     onClick={() => setActive(i)}
                     style={{ animationDelay: `${i * 70}ms` }}
-                    className={`animate-fade aspect-square w-20 flex-shrink-0 overflow-hidden rounded-xl transition ${
-                      i === active ? "ring-2 ring-gold ring-offset-2 ring-offset-cream" : "opacity-55 hover:opacity-100"
+                    className={`animate-fade aspect-square w-14 flex-shrink-0 overflow-hidden rounded-lg transition ${
+                      i === active ? "ring-2 ring-gold ring-offset-2 ring-offset-cream" : "opacity-50 hover:opacity-100"
                     }`}
                   >
                     {s.type === "video" ? (
@@ -92,28 +94,41 @@ export default function SectionSlider({ section, flip }) {
           </div>
 
           {/* DETAILS side */}
-          <div className={flip ? "lg:[direction:ltr]" : ""}>
-            <div key={slide.url} className="animate-fade flex h-full flex-col rounded-[20px] border border-ink/10 bg-white p-7">
+          <div
+            className={`flex flex-col justify-center p-8 sm:p-10 ${flip ? "lg:order-1" : "lg:order-2"} ${
+              flip
+                ? "bg-[radial-gradient(circle_at_top_left,_theme(colors.gold/8%),_transparent_60%)]"
+                : "bg-[radial-gradient(circle_at_top_right,_theme(colors.gold/8%),_transparent_60%)]"
+            }`}
+          >
+            <div key={slide.url} className="animate-fade flex h-full flex-col">
               {slide.subSection && (
                 <span className="w-fit rounded-full bg-gold/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-gold-dark">
                   {subName(slide.subSection)}
                 </span>
               )}
-              <h3 className="mt-4 font-serif text-3xl font-bold text-ink">{slide.title || "Untitled"}</h3>
-              {slide.details && <p className="mt-3 leading-relaxed text-neutral-600">{slide.details}</p>}
+              <h3 className="mt-4 font-serif text-2xl font-bold text-ink sm:text-3xl">{slide.title || "Untitled Piece"}</h3>
 
-              {slide.specs?.length > 0 && (
+              <p className="mt-3 leading-relaxed text-neutral-600">
+                {slide.details || "Custom made to your exact specifications — colors, size and backing all tailored to your brand."}
+              </p>
+
+              {slide.specs?.length > 0 ? (
                 <ul className="mt-5 grid gap-2.5">
                   {slide.specs.map((sp) => (
-                    <li key={sp} className="flex items-center gap-3 text-sm text-neutral-700">
-                      <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gold" />
+                    <li key={sp} className="flex items-start gap-3 text-sm text-neutral-700">
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gold" />
                       {sp}
                     </li>
                   ))}
                 </ul>
+              ) : (
+                <p className="mt-5 text-sm text-neutral-400">
+                  Material, sizing and MOQ details shared on request.
+                </p>
               )}
 
-              <a href="#contact" className="mt-auto block rounded-full bg-ink px-7 py-3.5 pt-4 text-center text-sm font-semibold text-cream transition hover:bg-ink-soft">
+              <a href="#contact" className="mt-7 block w-fit rounded-full bg-ink px-7 py-3 text-center text-sm font-semibold text-cream transition hover:bg-ink-soft">
                 Get a Quote for this
               </a>
             </div>
@@ -128,7 +143,7 @@ function TabBtn({ active, onClick, children, count }) {
   return (
     <button
       onClick={onClick}
-      className={`group flex items-center gap-2 whitespace-nowrap rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 ${
+      className={`group flex flex-shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
         active ? "scale-105 bg-ink text-cream shadow-lg shadow-ink/25" : "border border-ink/15 bg-white text-neutral-600 hover:-translate-y-0.5 hover:border-gold hover:text-gold-dark hover:shadow-md"
       }`}
     >

@@ -8,6 +8,14 @@ export default function Reveal({ children, delay = 0, className = "" }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // motion kam pasand karne walon ke liye seedha dikha dein, animate na karein
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setShown(true);
+      return;
+    }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

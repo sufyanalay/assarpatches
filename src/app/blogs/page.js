@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db";
 import Blog from "@/models/Blog";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Blog | Assar Patches",
@@ -25,7 +27,9 @@ export default async function BlogsPage() {
     .lean();
 
   return (
-    <main className="min-h-screen bg-neutral-950 text-white px-6 md:px-16 py-20">
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-neutral-950 text-white px-6 md:px-16 py-20">
       <div className="max-w-5xl mx-auto">
         <p className="text-amber-400 text-xs tracking-widest uppercase mb-3">Journal</p>
         <h1 className="text-4xl md:text-5xl font-semibold mb-4">From the workshop</h1>
@@ -76,6 +80,8 @@ export default async function BlogsPage() {
           ))}
         </div>
       </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }
