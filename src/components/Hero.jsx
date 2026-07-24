@@ -104,7 +104,6 @@ export default function Hero() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
             </div>
           </div>
-
           {/* floating badge chip — overlaps the frame like a sewn-on tag */}
           <div className="absolute -bottom-4 -left-3 hidden rounded-2xl border border-gold/30 bg-ink px-4 py-3 shadow-xl sm:block lg:-bottom-5 lg:-left-5">
             <p className="font-serif text-xl font-bold text-gold">5</p>
