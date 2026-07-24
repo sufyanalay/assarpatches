@@ -139,6 +139,8 @@ export default function SectionSlider({ section, flip }) {
   );
 }
 
+
+
 function TabBtn({ active, onClick, children, count }) {
   return (
     <button
