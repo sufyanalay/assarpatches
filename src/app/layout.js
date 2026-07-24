@@ -30,7 +30,9 @@ const serif = Cormorant_Garamond({
   weight: ["500", "600", "700"],
   variable: "--font-cormorant",
 });
+
 const sans = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
 
 export const metadata = {
   title: "Assar Patches — Custom PVC, Embroidered & Sublimation Patches",
