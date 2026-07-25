@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
+import { FiMapPin, FiPhone, FiMail } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function Contact() {
@@ -34,12 +34,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-20 bg-ink py-20 text-cream">
+    <section id="contact" className="scroll-mt-20 bg-cream py-20 text-ink">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Get in Touch</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-dark">Get in Touch</p>
           <h2 className="mt-2 font-serif text-4xl font-bold sm:text-5xl">Request a Quote</h2>
-          <p className="mt-3 text-cream/60">
+          <p className="mt-3 text-ink/60">
             Tell us what you need — we'll get back to you within 24 hours.
           </p>
         </div>
@@ -53,12 +53,12 @@ export default function Contact() {
             </div>
             <Field name="email" label="Email Address *" type="email" required />
             <div>
-              <label className="mb-1.5 block text-sm text-cream/70">Message</label>
+              <label className="mb-1.5 block text-sm text-ink/70">Message</label>
               <textarea
                 name="message"
                 rows={5}
                 required
-                className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-cream outline-none transition placeholder:text-cream/30 focus:border-gold"
+                className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-ink/30 focus:border-gold-dark"
                 placeholder="What would you like to get made?"
               />
             </div>
@@ -66,18 +66,18 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-ink transition hover:bg-gold-dark disabled:opacity-60"
+              className="rounded-full bg-gold-dark px-8 py-3.5 text-sm font-semibold text-cream transition hover:bg-ink disabled:opacity-60"
             >
               {status === "sending" ? "Sending..." : "Submit Request"}
             </button>
 
             {status === "success" && (
-              <p className="rounded-lg bg-green-500/15 px-4 py-3 text-sm text-green-300">
+              <p className="rounded-lg bg-green-500/10 px-4 py-3 text-sm text-green-700">
                 ✓ Thank you! Your message has been sent. We'll be in touch soon.
               </p>
             )}
             {status === "error" && (
-              <p className="rounded-lg bg-red-500/15 px-4 py-3 text-sm text-red-300">
+              <p className="rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-600">
                 Something went wrong. Please try again or email us directly.
               </p>
             )}
@@ -92,13 +92,13 @@ export default function Contact() {
               <InfoCard icon={FaWhatsapp} title="WhatsApp" text="+92 312 7370957" href="https://wa.me/923127370957" />
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-ink">
+            <div className="overflow-hidden rounded-2xl border border-ink/10">
               <iframe
                 title="Assar Patches Location"
                 src="https://www.google.com/maps?q=Sialkot,Pakistan&z=12&output=embed"
                 width="100%"
                 height="280"
-                style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(0.85) brightness(0.85)" }}
+                style={{ border: 0 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -113,12 +113,12 @@ export default function Contact() {
 function Field({ name, label, type = "text", required }) {
   return (
     <div>
-      <label className="mb-1.5 block text-sm text-cream/70">{label}</label>
+      <label className="mb-1.5 block text-sm text-ink/70">{label}</label>
       <input
         name={name}
         type={type}
         required={required}
-        className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-cream outline-none transition placeholder:text-cream/30 focus:border-gold"
+        className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-ink/30 focus:border-gold-dark"
       />
     </div>
   );
@@ -127,11 +127,11 @@ function Field({ name, label, type = "text", required }) {
 function InfoCard({ icon: Icon, title, text, href }) {
   const content = (
     <>
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/15 text-gold">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/15 text-gold-dark">
         <Icon size={18} />
       </div>
-      <p className="mt-3 text-sm font-semibold text-cream">{title}</p>
-      <p className="mt-0.5 text-sm text-cream/60">{text}</p>
+      <p className="mt-3 text-sm font-semibold text-ink">{title}</p>
+      <p className="mt-0.5 text-sm text-ink/60">{text}</p>
     </>
   );
 
@@ -141,7 +141,7 @@ function InfoCard({ icon: Icon, title, text, href }) {
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="block rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-gold/40 hover:bg-white/10"
+        className="block rounded-2xl border border-ink/10 bg-white p-5 transition hover:border-gold-dark/50 hover:shadow-sm"
       >
         {content}
       </a>
@@ -149,7 +149,7 @@ function InfoCard({ icon: Icon, title, text, href }) {
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+    <div className="rounded-2xl border border-ink/10 bg-white p-5">
       {content}
     </div>
   );

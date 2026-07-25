@@ -17,6 +17,9 @@ export default function AdminDashboard() {
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ title: "", tagline: "", description: "" });
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const usedTitles = sections.map((s) => s.title);
@@ -30,17 +33,42 @@ export default function AdminDashboard() {
   };
   useEffect(() => { load(); }, []);
 
+  const pickImage = (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    setImageFile(f);
+    setImagePreview(URL.createObjectURL(f));
+  };
+
   const addSection = async (e) => {
     e.preventDefault();
     setSaving(true);
+
+    let image = null;
+    if (imageFile) {
+      setUploading(true);
+      const fd = new FormData();
+      fd.append("file", imageFile);
+      const up = await fetch("/api/upload", { method: "POST", body: fd });
+      const upData = await up.json();
+      setUploading(false);
+      if (!upData.ok) { setSaving(false); return alert(upData.error); }
+      image = { url: upData.url, publicId: upData.publicId };
+    }
+
     const res = await fetch("/api/sections", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, image }),
     });
     const data = await res.json();
     setSaving(false);
-    if (data.ok) { setForm({ title: "", tagline: "", description: "" }); load(); }
+    if (data.ok) {
+      setForm({ title: "", tagline: "", description: "" });
+      setImageFile(null);
+      setImagePreview("");
+      load();
+    }
     else alert(data.error);
   };
 
@@ -53,7 +81,7 @@ export default function AdminDashboard() {
 
   const logout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
+    router.push("/aqibpvcadmin321/login");
   };
 
   return (
@@ -87,8 +115,18 @@ export default function AdminDashboard() {
           <textarea placeholder="Description" value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })} rows={2}
             className="mt-4 w-full rounded-xl border border-ink/15 px-4 py-2.5 outline-none focus:border-gold" />
+
+          <div className="mt-4">
+            <label className="mb-1.5 block text-sm text-neutral-600">Category Image (shown on homepage card)</label>
+            <input type="file" accept="image/*" onChange={pickImage}
+              className="block w-full text-sm text-neutral-600 file:mr-3 file:rounded-full file:border-0 file:bg-ink file:px-4 file:py-2 file:text-sm file:font-semibold file:text-cream" />
+            {imagePreview && (
+              <img src={imagePreview} alt="preview" className="mt-3 h-28 w-28 rounded-lg object-cover border border-ink/10" />
+            )}
+          </div>
+
           <button disabled={saving || availableOptions.length === 0} className="mt-4 rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-ink hover:bg-gold-dark disabled:opacity-60">
-            {saving ? "Adding..." : "Add Section"}
+            {uploading ? "Uploading image..." : saving ? "Adding..." : "Add Section"}
           </button>
         </form>
 
@@ -101,12 +139,19 @@ export default function AdminDashboard() {
           <div className="mt-4 space-y-3">
             {sections.map((s) => (
               <div key={s._id} className="flex items-center justify-between rounded-2xl border border-ink/10 bg-white p-5">
-                <div>
-                  <p className="font-serif text-lg font-bold text-ink">{s.title}</p>
-                  <p className="text-sm text-neutral-500">{(s.tagline || "No tagline") + " · " + (s.subSections?.length || 0) + " sub-sections · " + (s.slides?.length || 0) + " images"}</p>
+                <div className="flex items-center gap-4">
+                  {s.image?.url ? (
+                    <img src={s.image.url} alt={s.title} className="h-14 w-14 rounded-lg object-cover border border-ink/10" />
+                  ) : (
+                    <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-ink/5 font-serif text-lg text-ink/30">{s.title[0]}</div>
+                  )}
+                  <div>
+                    <p className="font-serif text-lg font-bold text-ink">{s.title}</p>
+                    <p className="text-sm text-neutral-500">{(s.tagline || "No tagline") + " · " + (s.subSections?.length || 0) + " sub-sections · " + (s.slides?.length || 0) + " images"}</p>
+                  </div>
                 </div>
                 <div className="flex gap-2">
-                  <Link href={"/admin/sections/" + s._id} className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft">Manage</Link>
+                  <Link href={"/aqibpvcadmin321/sections/" + s._id} className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft">Manage</Link>
                   <button onClick={() => removeSection(s._id, s.title)} className="rounded-full border border-red-300 px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50">Delete</button>
                 </div>
               </div>

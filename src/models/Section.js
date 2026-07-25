@@ -25,6 +25,10 @@ const SectionSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     tagline: { type: String, default: "" },
     description: { type: String, default: "" },
+    image: {
+      url: { type: String, default: "" },
+      publicId: { type: String, default: "" },
+    },
     order: { type: Number, default: 0 },
     subSections: { type: [SubSectionSchema], default: [] },
     slides: { type: [SlideSchema], default: [] },

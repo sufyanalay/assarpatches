@@ -30,6 +30,10 @@ export async function POST(req) {
       slug,
       tagline: body.tagline || "",
       description: body.description || "",
+      image: {
+        url: body.image?.url || "",
+        publicId: body.image?.publicId || "",
+      },
       order: count,
       subSections: [],
       slides: [],
