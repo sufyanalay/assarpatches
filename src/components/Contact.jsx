@@ -98,7 +98,7 @@ export default function Contact() {
                 src="https://www.google.com/maps?q=Sialkot,Pakistan&z=12&output=embed"
                 width="100%"
                 height="280"
-                style={{ border: 0, filter: "invert(92%) hue-rotate(180deg) contrast(85%)" }}
+                style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(0.85) brightness(0.85)" }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

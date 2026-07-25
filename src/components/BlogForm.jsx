@@ -66,7 +66,7 @@ export default function BlogForm({ initial, blogId }) {
       });
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || "Save failed");
-      router.push("/admin/blogs");
+      router.push("/aqibpvcadmin321/blogs");
       router.refresh();
     } catch (err) {
       setError(err.message);
