@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "./Reveal";
 
 export default function CategoryGrid({ sections }) {
   if (!sections?.length) return null;
@@ -15,13 +16,13 @@ export default function CategoryGrid({ sections }) {
         </div>
 
         <div className="no-bar mt-12 flex gap-5 overflow-x-auto pb-2">
-          {sections.map((s) => {
+          {sections.map((s, i) => {
             const thumb = s.image?.url; // only the dedicated admin-uploaded image, never a product/subsection photo
             return (
+              <Reveal key={s._id} delay={i * 80} className="flex-shrink-0">
               <Link
-                key={s._id}
                 href={`/patches/${s.slug}`}
-                className="group w-52 flex-shrink-0 overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:w-56"
+                className="group block w-52 overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:w-56"
               >
                 <div className="aspect-square overflow-hidden bg-ink/5">
                   {thumb ? (
@@ -44,6 +45,7 @@ export default function CategoryGrid({ sections }) {
                   </span>
                 </div>
               </Link>
+              </Reveal>
             );
           })}
         </div>

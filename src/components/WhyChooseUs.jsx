@@ -1,4 +1,5 @@
 import { FiAward, FiSettings, FiTruck, FiDollarSign } from "react-icons/fi";
+import Reveal from "./Reveal";
 
 const items = [
   {
@@ -51,8 +52,8 @@ export default function WhyChooseUs() {
             {items.map(({ icon: Icon, title, text }, i) => {
               const highlight = i === 1;
               return (
+                <Reveal key={title} delay={i * 100}>
                 <div
-                  key={title}
                   className={`rounded-2xl p-6 shadow-sm ${
                     highlight ? "bg-gold-dark text-cream" : "border border-ink/10 bg-white text-ink"
                   }`}
@@ -67,6 +68,7 @@ export default function WhyChooseUs() {
                   <h3 className="mt-4 font-serif text-lg font-bold">{title}</h3>
                   <p className={`mt-1.5 text-sm ${highlight ? "text-cream/80" : "text-ink/60"}`}>{text}</p>
                 </div>
+                </Reveal>
               );
             })}
           </div>

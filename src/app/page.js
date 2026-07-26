@@ -5,6 +5,8 @@ import Features from "@/components/Features";
 import About from "@/components/About";
 import CategoryGrid from "@/components/CategoryGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import ProcessSteps from "@/components/ProcessSteps";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -37,8 +39,10 @@ export default async function Home() {
       <TrustMarquee />
       <Reveal><Features /></Reveal>
       <Reveal><About images={galleryImages} /></Reveal>
-      <Reveal><CategoryGrid sections={sections} /></Reveal>
-      <Reveal><WhyChooseUs /></Reveal>
+      <CategoryGrid sections={sections} />
+      <WhyChooseUs />
+      <ProcessSteps />
+      <Reveal><FAQ /></Reveal>
       <Reveal><Contact /></Reveal>
       <Footer />
     </main>
