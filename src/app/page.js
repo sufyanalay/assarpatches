@@ -1,7 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
-import SectionSlider from "@/components/SectionSlider";
+import About from "@/components/About";
+import CategoryGrid from "@/components/CategoryGrid";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -23,16 +25,18 @@ async function getSections() {
 export default async function Home() {
   const sections = await getSections();
 
+  const galleryImages = sections
+    .flatMap((s) => (s.slides || []).filter((sl) => sl.type !== "video").map((sl) => sl.url))
+    .filter(Boolean);
+
   return (
     <main>
       <Navbar />
       <Hero />
       <Reveal><Features /></Reveal>
-      {sections.map((s, i) => (
-        <Reveal key={s._id} delay={i * 100}>
-          <SectionSlider section={s} flip={i % 2 === 1} />
-        </Reveal>
-      ))}
+      <Reveal><About images={galleryImages} /></Reveal>
+      <Reveal><CategoryGrid sections={sections} /></Reveal>
+      <Reveal><WhyChooseUs /></Reveal>
       <Reveal><Contact /></Reveal>
       <Footer />
     </main>

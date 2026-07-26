@@ -29,7 +29,7 @@ export default function Hero() {
 
           <div className="mt-6 flex flex-wrap gap-4">
             <a
-              href="#pvc-patches"
+              href="/#categories"
               className="rounded-full bg-gold-dark px-8 py-3.5 text-sm font-semibold text-cream shadow-lg shadow-gold/20 transition hover:bg-ink"
             >
               Explore Our Work
@@ -84,7 +84,7 @@ export default function Hero() {
 
       {/* scroll cue */}
       <a
-        href="#pvc-patches"
+        href="/#categories"
         className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-ink/40 transition hover:text-gold-dark lg:block"
         aria-label="Scroll down"
       >

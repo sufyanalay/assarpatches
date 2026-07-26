@@ -81,7 +81,7 @@ export default function AdminDashboard() {
 
   const logout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/aqibpvcadmin321/login");
+    router.push("/admin/login");
   };
 
   return (
@@ -151,7 +151,7 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Link href={"/aqibpvcadmin321/sections/" + s._id} className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft">Manage</Link>
+                  <Link href={"/admin/sections/" + s._id} className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-cream hover:bg-ink-soft">Manage</Link>
                   <button onClick={() => removeSection(s._id, s.title)} className="rounded-full border border-red-300 px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50">Delete</button>
                 </div>
               </div>
