@@ -9,7 +9,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-16">
         {/* TEXT SIDE */}
-        <div>
+        <div className="animate-fade">
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark">
             <span className="h-1.5 w-1.5 rounded-full bg-gold-dark" />
             Custom Patches & Embroidery
@@ -57,7 +57,7 @@ export default function Hero() {
         </div>
 
         {/* VISUAL SIDE — framed like a patch: stitched dashed border, rounded corners */}
-        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+        <div className="animate-fade relative mx-auto w-full max-w-md lg:max-w-none" style={{ animationDelay: "150ms" }}>
           <div className="relative rounded-[32px] border-2 border-dashed border-gold/50 bg-white p-3 shadow-sm">
             <div className="relative aspect-[4/3.4] overflow-hidden rounded-[24px] bg-ink shadow-2xl shadow-ink/20">
               <video

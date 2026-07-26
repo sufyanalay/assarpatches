@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TrustMarquee from "@/components/TrustMarquee";
 import Features from "@/components/Features";
 import About from "@/components/About";
 import CategoryGrid from "@/components/CategoryGrid";
@@ -33,6 +34,7 @@ export default async function Home() {
     <main>
       <Navbar />
       <Hero />
+      <TrustMarquee />
       <Reveal><Features /></Reveal>
       <Reveal><About images={galleryImages} /></Reveal>
       <Reveal><CategoryGrid sections={sections} /></Reveal>

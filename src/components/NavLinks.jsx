@@ -13,18 +13,18 @@ export default function NavLinks({ categories }) {
       {/* Desktop Navigation */}
       <ul className="hidden items-center gap-6 xl:flex">
         <li>
-          <Link href="/" className="text-sm font-medium text-ink/70 transition hover:text-gold-dark">
+          <Link href="/" className="relative text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full">
             Home
           </Link>
         </li>
 
         <li className="group relative">
-          <button className="flex items-center gap-1 text-sm font-medium text-ink/70 transition hover:text-gold-dark">
+          <button className="relative flex items-center gap-1 text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 group-hover:after:w-full">
             Patches
-            <FiChevronDown size={14} className="transition group-hover:rotate-180" />
+            <FiChevronDown size={14} className="transition duration-300 group-hover:rotate-180" />
           </button>
-          <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100">
-            <div className="max-h-80 overflow-y-auto rounded-xl border border-ink/10 bg-white p-2 shadow-xl">
+          <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+            <div className="max-h-80 overflow-y-auto rounded-xl border border-ink/10 bg-white p-2 shadow-xl ring-1 ring-gold/10">
               {categories.length === 0 ? (
                 <p className="px-3 py-2 text-sm text-ink/40">No categories yet</p>
               ) : (
@@ -32,7 +32,7 @@ export default function NavLinks({ categories }) {
                   <Link
                     key={c.slug}
                     href={`/patches/${c.slug}`}
-                    className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition hover:bg-cream hover:text-gold-dark"
+                    className="block rounded-lg px-3 py-2 text-sm text-ink/70 transition hover:bg-cream hover:text-gold-dark hover:pl-4"
                   >
                     {c.title}
                   </Link>
@@ -43,12 +43,12 @@ export default function NavLinks({ categories }) {
         </li>
 
         <li>
-          <Link href="/blogs" className="text-sm font-medium text-ink/70 transition hover:text-gold-dark">
+          <Link href="/blogs" className="relative text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full">
             Blogs
           </Link>
         </li>
         <li>
-          <Link href="/#contact" className="text-sm font-medium text-ink/70 transition hover:text-gold-dark">
+          <Link href="/#contact" className="relative text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full">
             Contact
           </Link>
         </li>
@@ -57,7 +57,7 @@ export default function NavLinks({ categories }) {
       {/* Desktop Button */}
       <Link
         href="/#contact"
-        className="hidden rounded-full border border-gold-dark px-5 py-2 text-sm font-semibold text-gold-dark transition hover:bg-gold-dark hover:text-cream xl:inline-block"
+        className="hidden rounded-full border border-gold-dark px-5 py-2 text-sm font-semibold text-gold-dark transition duration-300 hover:scale-105 hover:bg-gold-dark hover:text-cream xl:inline-block"
       >
         Get a Quote
       </Link>

@@ -21,3 +21,9 @@ body { background: var(--color-cream); color: var(--color-ink); font-family: var
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade { animation: fadeUp .5s ease both; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 25s linear infinite; }
