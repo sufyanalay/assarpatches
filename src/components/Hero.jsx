@@ -75,10 +75,10 @@ export default function Hero() {
           </div>
 
           {/* floating badge chip — overlaps the frame like a sewn-on tag */}
-          <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-ink/10 bg-white px-5 py-4 shadow-xl sm:block">
+          {/* <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-ink/10 bg-white px-5 py-4 shadow-xl sm:block">
             <p className="font-serif text-2xl font-bold text-gold-dark">5</p>
             <p className="text-[10px] uppercase tracking-[0.14em] text-ink/50">Patch Types</p>
-          </div>
+          </div> */}
         </div>
       </div>
 
