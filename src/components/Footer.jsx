@@ -26,8 +26,8 @@ export default async function Footer() {
               ASSAR <span className="text-gold-dark">PATCHES</span>
             </h3>
             <p className="mt-3 text-sm text-ink/60">
-              PVC, embroidered, sublimation, woven aur leather patches — aapke
-              brand ke liye, export quality mein.
+              Custom PVC, embroidered, sublimation, woven and leather patches
+              — made for your brand, at export quality.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default async function Footer() {
               <li>Email: assarpatches@gmail.com</li>
               <li>Phone: <a href="tel:+923127370957" className="hover:text-gold-dark">+92 312 7370957</a></li>
               <li>WhatsApp: <a href="https://wa.me/923127370957" target="_blank" rel="noopener noreferrer" className="hover:text-gold-dark">+92 312 7370957</a></li>
-              <li>TODO_ADDRESS</li>
+              <li>Defence Road, Akbarabad, Sialkot, Pakistan</li>
             </ul>
           </div>
         </div>

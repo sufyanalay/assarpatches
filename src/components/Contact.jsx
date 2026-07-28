@@ -37,7 +37,9 @@ export default function Contact() {
     <section id="contact" className="scroll-mt-20 bg-cream py-20 text-ink">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-dark">Get in Touch</p>
+          <p className="stitch-pill mx-auto inline-flex w-fit items-center rounded-full bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-gold-dark">
+            Get in Touch
+          </p>
           <h2 className="mt-2 font-serif text-4xl font-bold sm:text-5xl">Request a Quote</h2>
           <p className="mt-3 text-ink/60">
             Tell us what you need — we'll get back to you within 24 hours.
@@ -86,7 +88,7 @@ export default function Contact() {
           {/* INFO + MAP */}
           <div className="space-y-6">
             <div className="grid gap-4 sm:grid-cols-2">
-              <InfoCard icon={FiMapPin} title="Address" text="TODO_ADDRESS" />
+              <InfoCard icon={FiMapPin} title="Address" text="Defence Road, Akbarabad, Sialkot" />
               <InfoCard icon={FiPhone} title="Phone" text="+92 312 7370957" href="tel:+923127370957" />
               <InfoCard icon={FiMail} title="Email" text="assarpatches@gmail.com" href="mailto:assarpatches@gmail.com" />
               <InfoCard icon={FaWhatsapp} title="WhatsApp" text="+92 312 7370957" href="https://wa.me/923127370957" />
@@ -95,7 +97,7 @@ export default function Contact() {
             <div className="overflow-hidden rounded-2xl border border-ink/10">
               <iframe
                 title="Assar Patches Location"
-                src="https://www.google.com/maps?q=Sialkot,Pakistan&z=12&output=embed"
+                src="https://www.google.com/maps?q=Defence+Road,+Akbarabad,+Sialkot,+Pakistan&z=14&output=embed"
                 width="100%"
                 height="280"
                 style={{ border: 0 }}
