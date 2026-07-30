@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import TrustMarquee from "@/components/TrustMarquee";
 import Features from "@/components/Features";
 import About from "@/components/About";
-import CategoryGrid from "@/components/CategoryGrid";
+import AccordionGallery from "@/components/AccordionGallery";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ProcessSteps from "@/components/ProcessSteps";
 import FAQ from "@/components/FAQ";
@@ -32,6 +32,13 @@ export default async function Home() {
     .flatMap((s) => (s.slides || []).filter((sl) => sl.type !== "video").map((sl) => sl.url))
     .filter(Boolean);
 
+  const galleryItems = sections.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+    tagline: s.tagline,
+    image: s.image?.url || s.slides?.[0]?.url || "",
+  }));
+
   return (
     <main>
       <Navbar />
@@ -39,9 +46,9 @@ export default async function Home() {
       <TrustMarquee />
       <Reveal><Features /></Reveal>
       <Reveal><About images={galleryImages} /></Reveal>
-      <CategoryGrid sections={sections} />
-      <WhyChooseUs />
-      <ProcessSteps />
+      <AccordionGallery items={galleryItems} />
+      <Reveal><WhyChooseUs /></Reveal>
+      <Reveal><ProcessSteps /></Reveal>
       <Reveal><FAQ /></Reveal>
       <Reveal><Contact /></Reveal>
       <Footer />
