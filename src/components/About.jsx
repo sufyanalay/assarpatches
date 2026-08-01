@@ -142,6 +142,7 @@ export default function About({ images = [] }) {
                   : "-translate-y-10 opacity-0"
               }`}
             >
+              
               <div className="h-1 w-12 rounded-full bg-[#B88A3B]" />
               <div className="mt-1 h-12 w-1 rounded-full bg-[#B88A3B]" />
             </div>
