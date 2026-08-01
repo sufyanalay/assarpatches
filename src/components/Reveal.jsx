@@ -1,41 +1,81 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 
-export default function Reveal({ children, delay = 0, className = "" }) {
+export default function Reveal({
+  children,
+  delay = 0,
+  direction = "bottom",
+  distance = 40,
+  duration = 800,
+  className = "",
+}) {
   const ref = useRef(null);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
+
     if (!el) return;
 
-    // motion kam pasand karne walon ke liye seedha dikha dein, animate na karein
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     if (prefersReducedMotion) {
       setShown(true);
       return;
     }
 
-    const io = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setShown(true);
-          io.unobserve(el);
+          observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.15 }
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px",
+      },
     );
-    io.observe(el);
-    return () => io.disconnect();
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
   }, []);
+
+  const getHiddenTransform = () => {
+    switch (direction) {
+      case "left":
+        return `translate3d(-${distance}px, 0, 0)`;
+
+      case "right":
+        return `translate3d(${distance}px, 0, 0)`;
+
+      case "top":
+        return `translate3d(0, -${distance}px, 0)`;
+
+      case "bottom":
+      default:
+        return `translate3d(0, ${distance}px, 0)`;
+    }
+  };
 
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${
-        shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      } ${className}`}
+      className={className}
+      style={{
+        opacity: shown ? 1 : 0,
+        transform: shown ? "translate3d(0, 0, 0)" : getHiddenTransform(),
+
+        transitionProperty: "opacity, transform",
+        transitionDuration: `${duration}ms`,
+        transitionDelay: `${delay}ms`,
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        willChange: "opacity, transform",
+      }}
     >
       {children}
     </div>

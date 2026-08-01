@@ -18,7 +18,9 @@ export const dynamic = "force-dynamic"; // hamesha fresh data
 async function getSections() {
   try {
     await connectDB();
-    const sections = await Section.find().sort({ order: 1, createdAt: 1 }).lean();
+    const sections = await Section.find()
+      .sort({ order: 1, createdAt: 1 })
+      .lean();
     return JSON.parse(JSON.stringify(sections)); // plain objects
   } catch {
     return [];
@@ -29,7 +31,9 @@ export default async function Home() {
   const sections = await getSections();
 
   const galleryImages = sections
-    .flatMap((s) => (s.slides || []).filter((sl) => sl.type !== "video").map((sl) => sl.url))
+    .flatMap((s) =>
+      (s.slides || []).filter((sl) => sl.type !== "video").map((sl) => sl.url),
+    )
     .filter(Boolean);
 
   const galleryItems = sections.map((s) => ({
@@ -44,13 +48,27 @@ export default async function Home() {
       <Navbar />
       <Hero />
       <TrustMarquee />
-      <Reveal><Features /></Reveal>
-      <Reveal><About images={galleryImages} /></Reveal>
+      <Reveal>
+        <About images={galleryImages} />
+      </Reveal>
       <AccordionGallery items={galleryItems} />
-      <Reveal><WhyChooseUs /></Reveal>
-      <Reveal><ProcessSteps /></Reveal>
-      <Reveal><FAQ /></Reveal>
-      <Reveal><Contact /></Reveal>
+      <Reveal>
+        <Features />
+      </Reveal>
+
+      <Reveal>
+        <WhyChooseUs />
+      </Reveal>
+
+      <Reveal>
+        <ProcessSteps />
+      </Reveal>
+      <Reveal>
+        <FAQ />
+      </Reveal>
+      <Reveal>
+        <Contact />
+      </Reveal>
       <Footer />
     </main>
   );

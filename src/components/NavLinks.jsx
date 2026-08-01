@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { FiChevronDown, FiPlus, FiMinus } from "react-icons/fi";
+import { FiChevronDown, FiPlus, FiMinus, FiX } from "react-icons/fi";
 
-export default function NavLinks({ categories }) {
+export default function NavLinks({ categories, scrolled }) {
   const [open, setOpen] = useState(false); // mobile menu
   const [patchesOpen, setPatchesOpen] = useState(false); // mobile submenu
 
@@ -13,20 +13,38 @@ export default function NavLinks({ categories }) {
       {/* Desktop Navigation */}
       <ul className="hidden items-center gap-6 xl:flex">
         <li>
-          <Link href="/" className="relative text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full">
+          <Link
+            href="/"
+            className={`relative text-sm font-medium transition after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full ${
+              scrolled
+                ? "text-ink/70 hover:text-gold-dark"
+                : "text-white hover:text-gold"
+            }`}
+          >
             Home
           </Link>
         </li>
 
         <li className="group relative">
-          <button className="relative flex items-center gap-1 text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 group-hover:after:w-full">
+          <button
+            className={`relative flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 group-hover:after:w-full ${
+              scrolled
+                ? "text-ink/70 hover:text-gold-dark"
+                : "text-white hover:text-gold"
+            }`}
+          >
             Patches
-            <FiChevronDown size={14} className="transition duration-300 group-hover:rotate-180" />
+            <FiChevronDown
+              size={14}
+              className="transition duration-300 group-hover:rotate-180"
+            />
           </button>
           <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
             <div className="max-h-80 overflow-y-auto rounded-xl border border-ink/10 bg-white p-2 shadow-xl ring-1 ring-gold/10">
               {categories.length === 0 ? (
-                <p className="px-3 py-2 text-sm text-ink/40">No categories yet</p>
+                <p className="px-3 py-2 text-sm text-ink/40">
+                  No categories yet
+                </p>
               ) : (
                 categories.map((c) => (
                   <Link
@@ -43,12 +61,26 @@ export default function NavLinks({ categories }) {
         </li>
 
         <li>
-          <Link href="/blogs" className="relative text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full">
+          <Link
+            href="/blogs"
+            className={`relative text-sm font-medium transition after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full ${
+              scrolled
+                ? "text-ink/70 hover:text-gold-dark"
+                : "text-white hover:text-gold"
+            }`}
+          >
             Blogs
           </Link>
         </li>
         <li>
-          <Link href="/#contact" className="relative text-sm font-medium text-ink/70 transition hover:text-gold-dark after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full">
+          <Link
+            href="/#contact"
+            className={`relative text-sm font-medium transition after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-0 after:bg-gold-dark after:transition-all after:duration-300 hover:after:w-full ${
+              scrolled
+                ? "text-ink/70 hover:text-gold-dark"
+                : "text-white hover:text-gold"
+            }`}
+          >
             Contact
           </Link>
         </li>
@@ -65,14 +97,55 @@ export default function NavLinks({ categories }) {
       {/* Mobile Menu Button */}
       <button
         type="button"
-        className="text-ink xl:hidden"
-        onClick={() => setOpen(!open)}
-        aria-label="Toggle Menu"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label={open ? "Close Menu" : "Open Menu"}
+        aria-expanded={open}
+        className={`relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-all duration-300 xl:hidden ${
+          open
+            ? "bg-gold-dark text-white shadow-md"
+            : scrolled
+              ? "text-ink hover:bg-ink/5"
+              : "text-white hover:bg-white/10"
+        }`}
       >
-        <div className="space-y-1.5">
-          <span className="block h-0.5 w-6 bg-ink"></span>
-          <span className="block h-0.5 w-6 bg-ink"></span>
-          <span className="block h-0.5 w-6 bg-ink"></span>
+        <div className="relative flex h-6 w-6 items-center justify-center">
+          {/* Hamburger */}
+          <div
+            className={`absolute transition-all duration-300 ${
+              open
+                ? "scale-75 rotate-90 opacity-0"
+                : "scale-100 rotate-0 opacity-100"
+            }`}
+          >
+            <div className="space-y-1.5">
+              <span
+                className={`block h-0.5 w-6 rounded-full transition-colors duration-300 ${
+                  scrolled ? "bg-ink" : "bg-white"
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 rounded-full transition-colors duration-300 ${
+                  scrolled ? "bg-ink" : "bg-white"
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-6 rounded-full transition-colors duration-300 ${
+                  scrolled ? "bg-ink" : "bg-white"
+                }`}
+              />
+            </div>
+          </div>
+
+          {/* Close X */}
+          <FiX
+            size={23}
+            strokeWidth={2}
+            className={`absolute transition-all duration-300 ${
+              open
+                ? "scale-100 rotate-0 opacity-100"
+                : "scale-75 -rotate-90 opacity-0"
+            }`}
+          />
         </div>
       </button>
 
@@ -93,15 +166,21 @@ export default function NavLinks({ categories }) {
             <li>
               <button
                 onClick={() => setPatchesOpen(!patchesOpen)}
-                className="flex w-full items-center justify-between py-2 text-sm font-medium text-ink/70 hover:text-gold-dark"
+                className="cursor-pointer flex w-full items-center justify-between py-2 text-sm font-medium text-ink/70 hover:text-gold-dark "
               >
                 Patches
-                {patchesOpen ? <FiMinus size={14} /> : <FiPlus size={14} />}
+                {patchesOpen ? (
+                  <FiMinus className="cursor-pointer" size={14} />
+                ) : (
+                  <FiPlus className="cursor-pointer" size={14} />
+                )}
               </button>
               {patchesOpen && (
                 <ul className="ml-3 space-y-1 border-l border-ink/10 pl-3">
                   {categories.length === 0 ? (
-                    <li className="py-1.5 text-sm text-ink/40">No categories yet</li>
+                    <li className="py-1.5 text-sm text-ink/40">
+                      No categories yet
+                    </li>
                   ) : (
                     categories.map((c) => (
                       <li key={c.slug}>
