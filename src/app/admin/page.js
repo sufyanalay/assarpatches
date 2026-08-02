@@ -9,7 +9,7 @@ const SECTION_OPTIONS = [
   "Sublimation Patches",
   "Woven Patches",
   "Leather Patches",
-  "Others",
+  "uv printed patches ",
 ];
 
 export default function AdminDashboard() {
