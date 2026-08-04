@@ -133,12 +133,11 @@ export default function FAQ() {
 
                 {/* Main image */}
                 <div className="relative h-[300px] overflow-hidden rounded-[28px] bg-[#222] shadow-[0_25px_65px_rgba(55,40,20,0.16)] sm:h-[340px] lg:h-[300px]">
-                  <img
-                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=85"
-                    alt="Custom patch manufacturing"
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                  />
-
+                <img
+  src="/hero1.png"
+  alt="Custom patch manufacturing"
+  className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+/>
                   {/* Image overlays */}
                   <div className="absolute inset-0 bg-black/20" />
 
