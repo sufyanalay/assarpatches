@@ -9,7 +9,7 @@ const SECTION_OPTIONS = [
   "Sublimation Patches",
   "Woven Patches",
   "Leather Patches",
-  "uv printed patches ",
+  "Others",
 ];
 
 export default function AdminDashboard() {
@@ -17,6 +17,7 @@ export default function AdminDashboard() {
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ title: "", tagline: "", description: "" });
+  const [customTitle, setCustomTitle] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -42,6 +43,8 @@ export default function AdminDashboard() {
 
   const addSection = async (e) => {
     e.preventDefault();
+    const finalTitle = customTitle.trim() || form.title;
+    if (!finalTitle) return alert("Please select a section or type a custom name");
     setSaving(true);
 
     let image = null;
@@ -59,12 +62,13 @@ export default function AdminDashboard() {
     const res = await fetch("/api/sections", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, image }),
+      body: JSON.stringify({ ...form, title: finalTitle, image }),
     });
     const data = await res.json();
     setSaving(false);
     if (data.ok) {
       setForm({ title: "", tagline: "", description: "" });
+      setCustomTitle("");
       setImageFile(null);
       setImagePreview("");
       load();
@@ -94,15 +98,29 @@ export default function AdminDashboard() {
 
         <form onSubmit={addSection} className="mt-8 rounded-2xl border border-ink/10 bg-white p-6">
           <h2 className="font-serif text-xl font-bold text-ink">Add New Section</h2>
+
+          <div className="mt-4">
+            <label className="mb-1.5 block text-sm text-neutral-600">Type a custom section name</label>
+            <input
+              placeholder="e.g. Chenille Patches, Rubber Badges..."
+              value={customTitle}
+              onChange={(e) => setCustomTitle(e.target.value)}
+              className="w-full rounded-xl border border-ink/15 px-4 py-2.5 outline-none focus:border-gold"
+            />
+          </div>
+
+          <p className="mt-3 text-center text-xs uppercase tracking-widest text-neutral-400">or pick from quick list</p>
+
           {availableOptions.length === 0 && (
             <p className="mt-2 text-sm text-neutral-500">
-              Sab 5 patch categories already add ho chuki hain.
+              Sab quick-list categories already add ho chuki hain — upar custom naam type kar sakte hain.
             </p>
           )}
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="mt-2 grid gap-4 sm:grid-cols-2">
             <select value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="rounded-xl border border-ink/15 px-4 py-2.5 outline-none focus:border-gold bg-white" required>
+              onChange={(e) => { setForm({ ...form, title: e.target.value }); setCustomTitle(""); }}
+              disabled={availableOptions.length === 0}
+              className="rounded-xl border border-ink/15 px-4 py-2.5 outline-none focus:border-gold bg-white disabled:opacity-50">
               <option value="">— Select section —</option>
               {availableOptions.map((opt) => (
                 <option key={opt} value={opt}>{opt}</option>
@@ -125,7 +143,7 @@ export default function AdminDashboard() {
             )}
           </div>
 
-          <button disabled={saving || availableOptions.length === 0} className="mt-4 rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-ink hover:bg-gold-dark disabled:opacity-60">
+          <button disabled={saving} className="mt-4 rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-ink hover:bg-gold-dark disabled:opacity-60">
             {uploading ? "Uploading image..." : saving ? "Adding..." : "Add Section"}
           </button>
         </form>
